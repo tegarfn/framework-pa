@@ -107,9 +107,15 @@ Route::post('/sepatu/{id}', [SepatuController::class, 'update'])->name('sepatu.u
 
 Route::get('/sepatu/{id}', [SepatuController::class, 'destroy'])->name('sepatu.delete')->middleware('auth');
 
+// admin
+Route::get('/admin_register', function () {
+    return view('admin.register');
+})->name("admin.register");
 
+Route::post('/action-register-admin',[
+    AuthController::class, 'actionRegisterAdmin'
+]);
 
-//admin
 Route::get('/admin_login', [
     AuthController::class, 'loginViewAdmin'
 ])->name("admin.login");
@@ -126,34 +132,37 @@ Route::get('/admin', function () {
     ]);
 })->name("admin.home");
 
-Route::get('/admin/baju', function () {
-    return view('admin.baju_admin',[
-        "bajus" => Baju::all()
-    ]);
-})->name("admin.baju")->middleware('auth');
+Route::middleware('admin')->group(function (){
+    Route::get('/admin/baju', function () {
+        return view('admin.baju_admin',[
+            "bajus" => Baju::all()
+        ]);
+    })->name("admin.baju");
 
-Route::get('/admin/celana', function () {
-    return view('admin.celana_admin',[
-        "celanas" => Celana::all()
-    ]);
-})->name("admin.celana")->middleware('auth');
+    Route::get('/admin/celana', function () {
+        return view('admin.celana_admin',[
+            "celanas" => Celana::all()
+        ]);
+    })->name("admin.celana");
 
-Route::get('/admin/sepatu', function () {
-    return view('admin.sepatu_admin',[
-        "sepatus" => Sepatu::all()
-    ]);
-})->name("admin.sepatu")->middleware('auth');
+    Route::get('/admin/sepatu', function () {
+        return view('admin.sepatu_admin',[
+            "sepatus" => Sepatu::all()
+        ]);
+    })->name("admin.sepatu");
 
-Route::get('/admin/baju/show/{id}', [AdminController::class, 'showbaju'])->name('admin.show_baju')->middleware('auth');
-Route::get('/admin/celana/show/{id}', [AdminController::class, 'showcelana'])->name('admin.show_celana')->middleware('auth');
-Route::get('/admin/sepatu/show/{id}', [AdminController::class, 'showsepatu'])->name('admin.show_sepatu')->middleware('auth');
+    Route::get('/admin/baju/show/{id}', [AdminController::class, 'showbaju'])->name('admin.show_baju');
+    Route::get('/admin/celana/show/{id}', [AdminController::class, 'showcelana'])->name('admin.show_celana');
+    Route::get('/admin/sepatu/show/{id}', [AdminController::class, 'showsepatu'])->name('admin.show_sepatu');
 
-Route::get('/admin/baju/{id}/edit', [BajuController::class, 'editBajuAdmin'])->name('admin.baju.edit')->middleware('auth');
-Route::post('/admin/baju/{id}', [BajuController::class, 'updateBajuAdmin'])->name('admin.baju.update')->middleware('auth');
+    Route::get('/admin/baju/{id}/edit', [BajuController::class, 'editBajuAdmin'])->name('admin.baju.edit');
+    Route::post('/admin/baju/{id}', [BajuController::class, 'updateBajuAdmin'])->name('admin.baju.update');
 
-Route::get('/admin/celana/{id}/edit', [CelanaController::class, 'editCelanaAdmin'])->name('admin.celana.edit')->middleware('auth');
-Route::post('/admin/celana/{id}', [CelanaController::class, 'updateCelanaAdmin'])->name('admin.celana.update')->middleware('auth');
+    Route::get('/admin/celana/{id}/edit', [CelanaController::class, 'editCelanaAdmin'])->name('admin.celana.edit');
+    Route::post('/admin/celana/{id}', [CelanaController::class, 'updateCelanaAdmin'])->name('admin.celana.update');
 
-Route::get('/admin/sepatu/{id}/edit', [SepatuController::class, 'editSepatuAdmin'])->name('admin.sepatu.edit')->middleware('auth');
-Route::post('/admin/sepatu/{id}', [SepatuController::class, 'updateSepatuAdmin'])->name('admin.sepatu.update')->middleware('auth');
+    Route::get('/admin/sepatu/{id}/edit', [SepatuController::class, 'editSepatuAdmin'])->name('admin.sepatu.edit');
+    Route::post('/admin/sepatu/{id}', [SepatuController::class, 'updateSepatuAdmin'])->name('admin.sepatu.update');
+
+});
 

@@ -15,6 +15,7 @@ class AuthController extends Controller
                 'name' => $request->name,
                 'email' => $request->email,
                 'alamat' => $request->alamat,
+                'Admin' => $request->Admin,
                 'password' => Hash::make($request->password),
             ]);
             session()->flash('success', 'Berhasil Membuat Akun!');
@@ -53,7 +54,7 @@ class AuthController extends Controller
     public function logout(){
         Auth::logout();
         session()->flash('success', 'Berhasil Logout');
-        return redirect('/supplier_login');
+        return redirect('/');
     }
 
     public function loginViewAdmin(){
@@ -68,17 +69,37 @@ class AuthController extends Controller
 
     public function actionLoginAdmin(Request $request){
         $dataA = [
-            'password' => $request->password,
+            'email' => $request->email,
+            'password' => $request->password
         ];
 
         if (Auth::Attempt($dataA)) {
             session()->flash('success', 'Berhasil Masuk');
             return redirect('/admin');
         } else {
-            session()->flash('error', 'Email atau Password Salah');
-            return redirect('/admin');
+            session()->flash('error', 'Password Salah');
+            return redirect('/');
         }
 
     }
+
+    public function actionRegisterAdmin(Request $request){
+        if($request->password == $request->confirm_password){
+            User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'alamat' => $request->alamat,
+                'Admin' => $request->Admin,
+                'password' => Hash::make($request->password),
+            ]);
+            session()->flash('success', 'Berhasil Membuat Akun!');
+            return redirect('/admin_register');
+
+        } else{
+            session()->flash('error', 'Konfirmasi Password Anda Berbeda!');
+            return redirect('/admin_register');
+        }
+    }
+
 
 }

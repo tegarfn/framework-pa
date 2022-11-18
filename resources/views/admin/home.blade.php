@@ -6,6 +6,14 @@ Home
 @section('content')
     <div class="container px-4 py-5">
         <h2 class="pb-2 fs-4">Baju, Celana, & Sepatu Anda</h2>
+        @if (session('error'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{ session('error') }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
         <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
             @foreach ($bajus as $baju)
                 <div class="card" style="width: 18rem; margin:10px; background-color: #C7F2A4;">

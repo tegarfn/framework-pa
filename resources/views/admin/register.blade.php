@@ -28,36 +28,51 @@
             integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous">
     </script>
     <div class="container mt-5">
-        <h1 class="text-center mb-5">Login Admin</h1>
+        <h1 class="text-center mb-5">Registrasi Admin</h1>
         <div class="d-grid gap-2 col-2 mx-auto">
         </div>
         <div class="card" style="background-color: #C7F2A4;">
             <div class="card-body">
+                @if(session('success'))
+                <div class="alert alert-success">
+                    <b>Yeah!</b> {{session('success')}}
+                </div>
+                @endif
                 @if(session('error'))
                 <div class="alert alert-danger">
-                    <b>Oops!</b> {{session('error')}}
+                    <b>Opps!</b> {{session('error')}}
                 </div>
                 @endif
-                @if(session('success'))
-                <div class="alert alert-succes">
-                    <b>Yeay!</b> {{session('success')}}
-                </div>
-                @endif
-                <form action="{{url('/action-login-admin')}}" method="POST">
+                <form action="{{url('/action-register-admin')}}" method="POST">
                     @csrf
+                    <div class="mb-3">
+                        <label class="form-label">Nama</label>
+                        <input type="text" class="form-control" style="background-color: #FCFFB2" name="name" placeholder="Masukkan Nama" required>
+                    </div>
                     <div class="mb-3">
                         <label class="form-label">Email</label>
                         <input type="email" class="form-control" style="background-color: #FCFFB2" name="email" placeholder="Masukkan email" required>
                     </div>
                     <div class="mb-3">
+                        <label class="form-label">Alamat</label>
+                        <input type="text" class="form-control" style="background-color: #FCFFB2" name="alamat" placeholder="Masukkan alamat" required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="hidden" value="1" class="form-control" style="background-color: #FCFFB2" name="Admin"required>
+                    </div>
+                    <div class="mb-3">
                         <label class="form-label">Password</label>
                         <input type="password" class="form-control" style="background-color: #FCFFB2" name="password" placeholder="Masukkan Password" required>
                     </div>
+                    <div class="mb-3">
+                        <label class="form-label">Konfirmasi Password</label>
+                        <input type="password" class="form-control" style="background-color: #FCFFB2" name="confirm_password" placeholder="Komfirmasi Password" required>
+                    </div>
                     <div class="text-center">
-                        <button type="submit" class="btn btn-outline-success me-2">Masuk</button>
+                        <button type="submit" class="btn btn-outline-success me-2">Simpan</button>
                     </div>
                     <div class="mt-3">
-                        <p>Belum Punya Akun? <a class="text-primary" href="/admin_register">Register</a></p>
+                        <p>Sudah Punya Akun? <a class="text-primary" href="/admin_login">Login</a></p>
                     </div>
                 </form>
             </div>

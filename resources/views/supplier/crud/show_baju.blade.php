@@ -1,7 +1,7 @@
 @extends('supplier.layouts.global')
 
 @section('title')
-MyFOOD - Detail Data
+Detail Data
 @endsection
 @section('content')
 <div class="container">

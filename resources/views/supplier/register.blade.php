@@ -58,6 +58,9 @@
                         <input type="text" class="form-control" style="background-color: #FCFFB2" name="alamat" placeholder="Masukkan alamat" required>
                     </div>
                     <div class="mb-3">
+                        <input type="hidden" value='0' class="form-control" style="background-color: #FCFFB2" name="Admin"required>
+                    </div>
+                    <div class="mb-3">
                         <label class="form-label">Password</label>
                         <input type="password" class="form-control" style="background-color: #FCFFB2" name="password" placeholder="Masukkan Password" required>
                     </div>

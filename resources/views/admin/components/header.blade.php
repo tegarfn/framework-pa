@@ -19,6 +19,11 @@
             <li class="nav-item">
             <a class="nav-link" href="{{route('admin.sepatu')}}">Sepatu</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ Auth::user() ? '/logout': '/login/admin'}}"
+                    aria-current="page">{{ Auth::user() ? 'Logout' :'Login'}}
+                </a>
+            </li>
         </ul>
         </div>
     </div>
