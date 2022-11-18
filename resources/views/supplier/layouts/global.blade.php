@@ -13,7 +13,7 @@
     <link rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
-    <title>Test</title>
+    <title>@yield('title')</title>
 
 </head>
 <body style="background-color: #E1FFB1;">

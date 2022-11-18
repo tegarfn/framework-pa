@@ -5,7 +5,7 @@ Ini Halaman Home
 
 @section('content')
 <div class="container px-4 py-5">
-    <h2 class="pb-2 border-bottom">Daftar sp</h2>
+    <h2 class="pb-2 border-bottom">Daftar Sepatu</h2>
     @if (session('success'))
         <div class="alert alert-success">
             <b>Yeah!</b> {{ session('success') }}

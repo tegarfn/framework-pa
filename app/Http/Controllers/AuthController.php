@@ -28,7 +28,7 @@ class AuthController extends Controller
 
     public function loginView(){
         if(Auth::check()){
-            return redirect('/');
+            return redirect('/supplier');
         } else{
             return view('supplier.login');
         }
@@ -42,10 +42,10 @@ class AuthController extends Controller
 
         if (Auth::Attempt($data)) {
             session()->flash('success', 'Berhasil Masuk');
-            return redirect('/');
+            return redirect('/supplier');
         } else {
             session()->flash('error', 'Email atau Password Salah');
-            return redirect('/');
+            return redirect('/supplier');
         }
 
     }

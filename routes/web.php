@@ -20,29 +20,36 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('supplier.home',[
-    ]);
+Route::get('/', function(){
+    return view('supplier.landingPage');
 });
+
+Route::get('/supplier', function () {
+    return view('supplier.home',[
+        "bajus" => Baju::all(),
+        "celanas" => Celana::all(),
+        "sepatus" => Sepatu::all()
+
+    ]);
+})->middleware('auth');
 
 Route::get('/supplier/baju', function () {
     return view('supplier.baju',[
         "bajus" => Baju::all()
     ]);
-})->name("supplier.baju");
+})->name("supplier.baju")->middleware('auth');
 
 Route::get('/supplier/celana', function () {
     return view('supplier.celana',[
         "celanas" => Celana::all()
     ]);
-})->name("supplier.celana");
+})->name("supplier.celana")->middleware('auth');
 
 Route::get('/supplier/sepatu', function () {
     return view('supplier.sepatu',[
         "sepatus" => Sepatu::all()
     ]);
-})->name("supplier.sepatu");
+})->name("supplier.sepatu")->middleware('auth');
 
 
 Route::get('/supplier_register', function () {
@@ -112,29 +119,34 @@ Route::post('/action-login-admin',[
 ]);
 
 Route::get('/admin', function () {
-    return view('admin.home');
+    return view('admin.home', [
+        "bajus" => Baju::all(),
+        "celanas" => Celana::all(),
+        "sepatus" => Sepatu::all()
+    ]);
 })->name("admin.home");
 
 Route::get('/admin/baju', function () {
     return view('admin.baju_admin',[
         "bajus" => Baju::all()
     ]);
-})->name("admin.baju");
+})->name("admin.baju")->middleware('auth');
 
 Route::get('/admin/celana', function () {
     return view('admin.celana_admin',[
         "celanas" => Celana::all()
     ]);
-})->name("admin.celana");
+})->name("admin.celana")->middleware('auth');
 
 Route::get('/admin/sepatu', function () {
     return view('admin.sepatu_admin',[
         "sepatus" => Sepatu::all()
     ]);
-})->name("admin.sepatu");
-Route::get('/admin/baju/show/{id}', [AdminController::class, 'showbaju'])->name('admin.show_baju');
-Route::get('/admin/celana/show/{id}', [AdminController::class, 'showcelana'])->name('admin.show_celana');
-Route::get('/admin/sepatu/show/{id}', [AdminController::class, 'showsepatu'])->name('admin.show_sepatu');
+})->name("admin.sepatu")->middleware('auth');
+
+Route::get('/admin/baju/show/{id}', [AdminController::class, 'showbaju'])->name('admin.show_baju')->middleware('auth');
+Route::get('/admin/celana/show/{id}', [AdminController::class, 'showcelana'])->name('admin.show_celana')->middleware('auth');
+Route::get('/admin/sepatu/show/{id}', [AdminController::class, 'showsepatu'])->name('admin.show_sepatu')->middleware('auth');
 
 Route::get('/admin/baju/{id}/edit', [BajuController::class, 'editBajuAdmin'])->name('admin.baju.edit')->middleware('auth');
 Route::post('/admin/baju/{id}', [BajuController::class, 'updateBajuAdmin'])->name('admin.baju.update')->middleware('auth');

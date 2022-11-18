@@ -10,6 +10,9 @@ class ModelCelana extends Model
     public function Celana() {
         return $this->hasMany(Celana::class);
     }
+    public function Supplier() {
+        return $this->belongsTo(Supplier::class);
+    }
 
     use HasFactory;
 }
