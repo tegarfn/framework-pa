@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Baju;
 use App\Models\ModelBaju;
 use App\Models\User;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -13,8 +14,14 @@ use Nette\Utils\Image;
 class BajuController extends Controller
 {
     public function index(){
+        $endpoint = env('BASE_ENV') . '/api/baju';
+
+        $client = new Client();
+        $response = $client->request('GET', $endpoint);
+        $data = json_decode($response->getBody(), true);
+
         return view('supplier.home', [
-            'bajus' => Baju::where('user_id', Auth::user()->id)->get()
+            'bajus' => $data['data']
         ]);
     }
 

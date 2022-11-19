@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ModelSepatu;
 use App\Models\Sepatu;
+use GuzzleHttp\Client;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,8 +14,14 @@ use Nette\Utils\Image;
 class SepatuController extends Controller
 {
     public function index(){
+        $endpoint = env('BASE_ENV') . '/api/baju';
+
+        $client = new Client();
+        $response = $client->request('GET', $endpoint);
+        $data = json_decode($response->getBody(), true);
+
         return view('supplier.home', [
-            'sepatus' => Sepatu::all()
+            'sepatus' => $data['data']
         ]);
     }
 

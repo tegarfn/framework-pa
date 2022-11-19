@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Celana;
 use App\Models\ModelCelana;
+use GuzzleHttp\Client;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,8 +14,14 @@ use Nette\Utils\Image;
 class CelanaController extends Controller
 {
     public function index(){
+        $endpoint = env('BASE_ENV') . '/api/baju';
+
+        $client = new Client();
+        $response = $client->request('GET', $endpoint);
+        $data = json_decode($response->getBody(), true);
+
         return view('supplier.home', [
-            'celanas' => Celana::where('user_id', Auth::user()->id)->get()
+            'celanas' => $data['data']
         ]);
     }
 
