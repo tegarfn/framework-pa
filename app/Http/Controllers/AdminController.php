@@ -6,19 +6,26 @@ use App\Models\Baju;
 use App\Models\Celana;use App\Models\ModelBaju;
 use App\Models\Sepatu;
 
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
     public function index(){
+        $endpoint = env('BASE_ENV') . '/api';
+
+        $client = new Client();
+        $response = $client->request('GET', $endpoint);
+        $data = json_decode($response->getBody(), true);
+
         return view('admin.index_admin', [
-            'bajus' => Baju::all(),
-            'celanas' => Celana::all(),
-            'sepatus' => Sepatu::all()
+            'bajus' => $data['data'],
+            'celanas' => $data['data'],
+            'sepatus' => $data['data']
         ]);
     }
 
-    public function showbaju(Baju $id){
+    public function showbaju(Baju $id){        
         return view('admin.show_baju', [
             'title' => 'Baju',
             'bajus' => $id,

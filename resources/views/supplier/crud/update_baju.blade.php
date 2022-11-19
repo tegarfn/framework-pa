@@ -1,11 +1,11 @@
 @extends('supplier.layouts.global') 
 
 @section('title')
-MyFOOD - Tambah Data
+MyFOOD - Edit Data
 @endsection
 @section('content')
 <div class="container mt-5">
-    <h1 class="text-center mb-5">Tambah Baju</h1>
+    <h1 class="text-center mb-5">Edit Baju</h1>
     <div class="d-grid gap-2 col-2 mx-auto">
     </div>
     <div class="card" style="background-color: #C7F2A4;">

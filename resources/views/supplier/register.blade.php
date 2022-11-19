@@ -18,7 +18,7 @@
 
 <body style="background-color: #E1FFB1;">
     <!-- JavaScript Bundle with Popper -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark;">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand fs-2 fw-bold" href="#">TED Inventory</a>
         </div>

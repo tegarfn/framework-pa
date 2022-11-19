@@ -13,15 +13,9 @@ use Nette\Utils\Image;
 
 class CelanaController extends Controller
 {
-    public function index(){
-        $endpoint = env('BASE_ENV') . '/api/baju';
-
-        $client = new Client();
-        $response = $client->request('GET', $endpoint);
-        $data = json_decode($response->getBody(), true);
-
+    public function index(){        
         return view('supplier.home', [
-            'celanas' => $data['data']
+            'celanas' => Celana::where('user_id', Auth::user()->id)->get()
         ]);
     }
 
